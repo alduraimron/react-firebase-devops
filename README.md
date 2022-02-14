@@ -1,10 +1,20 @@
-# Getting Started with Create React App
+# React Notes App
+By: Payden Dyer
+Web App that can add and delete notes
+https://paydendyer.github.io/react-notes-app
+## Technology Used:
+1. React.js
+2. CSS Grid
+3. Git
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Description of Application:
+This is a web app built with React that can save and delete notes to the computer's local storage. It features a search bar and a dark mode toggler.
 
-## Available Scripts
+## Setup Instructions
+After cloning the respository, run npx start in the terminal
 
-In the project directory, you can run:
+## Known Bugs:
+None
 
 ### `npm start`
 
@@ -68,4 +78,6 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
->>>>>>> 8f7e6bb (First commit)
+
+## License
+Payden Dyer 2/14/2022
