@@ -59,7 +59,10 @@ const App = () => {
 
   return (
     <div className={`${darkMode && 'dark-mode'}`}>
-      
+      <nav style={styles.navbar}>
+        <h1>React Notes App</h1>
+        <p>my notes</p>
+      </nav>
 
       <div className="container">
         <Header handleToggleDarkMode={setDarkMode} />
