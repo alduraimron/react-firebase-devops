@@ -61,7 +61,6 @@ const App = () => {
     <div className={`${darkMode && 'dark-mode'}`}>
       <nav style={styles.navbar}>
         <h1>React Notes App</h1>
-        <p>my notes</p>
       </nav>
 
       <div className="container">
@@ -75,6 +74,10 @@ const App = () => {
           handleDeleteNote={deleteNote}
         />
       </div>
+      
+      <footer style={styles.footer}>
+        <p>© 2025 React Notes App. All Rights Reserved.</p>
+      </footer>
     </div>
   );
 };
@@ -88,6 +91,16 @@ const styles = {
     fontSize: "22px",
     fontWeight: "bold",
     boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)"
+  },
+  footer: {
+    backgroundColor: "#333",
+    color: "white",
+    textAlign: "center",
+    padding: "10px",
+    marginTop: "20px",
+    position: "fixed",
+    bottom: "0",
+    width: "100%",
   },
 };
 
