@@ -59,12 +59,7 @@ const App = () => {
 
   return (
     <div className={`${darkMode && 'dark-mode'}`}>
-      <nav style={styles.navbar}>
-        <ul>
-          <li>Home</li>
-          <li>About</li>
-        </ul>
-      </nav>
+      
 
       <div className="container">
         <Header handleToggleDarkMode={setDarkMode} />
