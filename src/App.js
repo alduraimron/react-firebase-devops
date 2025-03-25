@@ -60,7 +60,10 @@ const App = () => {
   return (
     <div className={`${darkMode && 'dark-mode'}`}>
       <nav style={styles.navbar}>
-        <button>New Note</button>
+        <ul>
+          <li>Home</li>
+          <li>About</li>
+        </ul>
       </nav>
 
       <div className="container">
