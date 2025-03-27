@@ -1,85 +1,98 @@
 # React Notes App
-By: Payden Dyer
 
-Web App that can add and delete notes
+## 📥 Installation
+### **1. Clone Repository**
+```sh
+git clone https://github.com/alduraimron/react-firebase-devops.git
+cd react-firebase-devops
+```
 
-https://paydendyer.github.io/react-notes-app
-## Technology Used:
-1. React.js
-2. CSS Grid
-3. Git
+### **2. Install Dependencies**
+```sh
+npm install
+```
 
-## Description of Application:
-This is a web app built with React that can save and delete notes to the computer's local storage. It features a search bar and a dark mode toggler. Tutorial from: https://www.youtube.com/watch?v=8KB3DHI-QbM&t=191
+### **3. Run Development Server**
+```sh
+npm start
+```
+Aplikasi akan berjalan di `http://localhost:3000`
 
-## Setup Instructions
-After cloning the respository, run npx start in the terminal
+---
 
-## Known Bugs:
-None
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🚀 Deployment
+### **1. Install Firebase CLI**
+```sh
+npm install -g firebase-tools
+firebase login
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### **2. Konfigurasi Firebase**
+```sh
+firebase init
+```
+- Pilih **Hosting**
+- Pilih proyek Firebase yang sudah dibuat
+- Set **public directory** ke `build`
+- Pilih **Yes** untuk single-page app
 
-### `npm test`
+### **3. Build & Deploy Manual**
+```sh
+npm run build
+firebase deploy
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## 🔄 CI/CD dengan GitHub Actions
+Proyek ini menggunakan **GitHub Actions** untuk otomatisasi deployment ke Firebase saat ada push ke `main`.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### **.github/workflows/firebase-deploy.yml**
+```yaml
+name: Deploy to Firebase Hosting
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+on:
+  push:
+    branches:
+      - main 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
 
-### `npm run eject`
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+      - name: Install dependencies
+        run: npm install
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+      - name: Build project
+        env:
+          NODE_OPTIONS: --openssl-legacy-provider
+        run: npm run build
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+      - name: Deploy to Firebase Hosting
+        uses: w9jds/firebase-action@master
+        with:
+          args: deploy --only hosting
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          channelId: live
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### **4. Konfigurasi GitHub Secrets**
+1. **Buka repository di GitHub**
+2. **Masuk ke** `Settings > Secrets and variables > Actions`
+3. **Tambahkan Secret Baru:**
+   - `FIREBASE_TOKEN`: (Token dari Firebase)
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-
-## License
-Payden Dyer 2/14/2022
+### **5. Push ke Main untuk Deployment Otomatis**
+```sh
+git add .
+git commit -m "Deploy update"
+git push origin main
+```
+Aplikasi akan otomatis **build & deploy** ke Firebase!
